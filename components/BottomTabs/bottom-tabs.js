@@ -1,7 +1,8 @@
+import React from "react";
+import { StyleSheet, Text, View, Pressable, Vibration } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Icons from "react-native-vector-icons/Ionicons";
-import Stats from "../../pages/Stats/stats";
 import Defis from "../../pages/Defis/defis";
 import Mode from "../../pages/Mode/mode";
 
@@ -9,33 +10,45 @@ const Tab = createBottomTabNavigator();
 
 export default function BottomTabs() {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      screenOptions={{
+        tabBarActiveTintColor: "#00A67E",
+        tabBarInactiveTintColor: "#E0E0E0",
+        tabBarLabelStyle: {
+          fontSize: 16,
+          fontWeight: "bold",
+        },
+        tabBarStyle: {
+          backgroundColor: "black",
+          borderTopColor: "#202020",
+        },
+        headerShown: false,
+      }}
+    >
       <Tab.Screen
         name="Mode"
         component={Mode}
         options={{
-          tabBarIcon: () => <Icons name="fitness" size={30} color="#00A67E" />,
-          tabBarLabelStyle: {
-            fontSize: 16,
-            fontWeight: "bold",
-            color: "#00A67E",
-          },
+          tabBarIcon: ({ color }) => (
+            <Icons name="fitness" size={30} color={color} />
+          ),
         }}
       />
       <Tab.Screen
         name="Defis"
         component={Defis}
         options={{
-          tabBarIcon: () => (
-            <MaterialCommunityIcons name="table" size={30} color="#00A67E" />
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="table" size={30} color={color} />
           ),
-          tabBarLabelStyle: {
-            fontSize: 16,
-            fontWeight: "bold",
-            color: "#00A67E",
-          },
         }}
       />
     </Tab.Navigator>
   );
 }
+
+const styles = StyleSheet.create({
+  tab: {
+    backgroundColor: "black",
+  },
+});
